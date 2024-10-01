@@ -1,0 +1,687 @@
+<!DOCTYPEhtml>
+<html>
+	<head>
+		<title>Ultimate RPS</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="gaamestyle.css">
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital@0;1&display=swap" rel="stylesheet">
+		<link type="image/png" rel="icon" href="images/favicon.png">
+	</head>
+	<body>
+		<ul>
+ 			<li><a href="#top">Home</a></li>
+ 			<li><a href="#game">Play</a></li>
+  			<li><a href="#howTo">How-To</a></li>
+  			<li><a href="#outcomes">outcomes</a></li>
+		</ul>
+		<div id="top"style="height:100vh; display:flex; justify-content:center; align-content: center;">
+			<h1 style="text-shadow: 2px 2px #000000; "><b>Ultimate Rock Paper scissors</b></h1>
+		</div>
+		<div id="game" style="border:1px solid #27285C;;">
+		<div class="gameElements">
+			<div class="holdText" width="100%">
+				<div id="homeScreen">
+					<p class="title">Ultimate Rock Paper Scissors</p>
+					<button type="button" id="start" class="start" onClick="playGame();">Play</button>
+				</div>
+				<div id="gamePlay" style="display:none">
+					<p class="instruct">What do you want to use?</p>
+					<div style="display: grid; grid-template-columns: auto auto auto auto auto; margin:auto; row-gap: 15px; column-gap:auto; justify-content: space-evenly;">
+						<div><button type="button" id="rock" class="choice" onClick="pickRock();"><img src="images/rock.png.png" class="select"><br>Rock</button></div>
+						<div><button type="button" id="paper" class="choice" onClick="pickPaper();"><img src="images/paper.jpg" class="select"><br>Paper</button></div>
+						<div><button type="button" id="scissors" class="choice" onClick="pickScissors();"><img src="images/scissors.png" class="select"><br>Scissors</button></div>
+						<div><button type="button" id="wrench" class="choice" onClick="pickWrench();"><img src="images/wrench.png" class="select"><br>Wrench</button></div>
+						<div><button type="button" id="nuke" class="choice" onClick="pickNuke();"><img src="images/nuke.png" class="select"><br>Nuke</button></div>
+					</div>
+					<div style="display: grid; grid-template-columns: auto auto auto auto; margin:auto; margin-top:15px; row-gap: 15px; column-gap:auto; justify-content: space-evenly;">
+						<div><button type="button" id="flamethrower" class="choice" onClick="pickFlamethrower();"><img src="images/flamethrower.png" class="select"><br>Flame thrower</button></div>
+						<div><button type="button" id="robot" class="choice" onClick="pickRobot();"><img src="images/robot.png" class="select"><br>Robot</button></div>
+						<div><button type="button" id="drill" class="choice" onClick="pickDrill();"><img src="images/drill.png" class="select"><br>Drill</button></div>
+						<div><button type="button" id="acid" class="choice" onClick="pickAcid();"><img src="images/acid.png" class="select"><br>Acid</button></div>
+					</div>
+				</div>
+				<div id="choiceReveal" style="display: none; height:100%; width:100%; z-index:1; position: absolute">
+					<div style="float: left;" class="background" id="leftPanel"></div>
+					<div style="float: right; right:0px;" class="background" id="rightPanel"></div>
+					<div class="pick" style="left:25%; top: 30%;"><img src="images/versus.png" style="height: 250px;" id="versus"></div>
+					<div style="float: left;" class="pick" id="playerPick">
+						<p class="show" id="showPlayerPick"></p>
+						<div id="playerImage"></div>
+					</div>
+					<div style="float: right;" class="pick" id="aiPick">
+						<p class="show" id="showAiPick"></p>
+						<div id="aiImage"></div>
+					</div>
+				</div>
+				<div id="gameResult" style="display:none; width: 100%; height:100%; position:absolute;">
+					<div class="afterpick">
+						<p class="show" id="showResult"></p>
+					</div>
+					<div class="flavor">
+						<p class="flavor" id="flavorText"></p>
+					</div>
+					<div>
+						<button type="button" id="restart" class="restart" onClick="restartGame();">Restart</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div id="howTo"style="display:flex; flex-direction: column; align-items: center; background: rgb(39,40,92); background: linear-gradient(0deg, rgba(39,40,92,1) 0%, rgba(110,105,103,1) 20%, rgba(110,105,103,1) 80%, rgba(39,40,92,1) 100%); justify-content:center; color:#27285C; height:100vh;">
+			<p style="font-size:60px;">How to play:</p>
+			<p style="font-size:40px; text-align:center; width:80%;">Pick one of the nine options. The computer will also pick one. Then see who wins!</p>
+		</div>
+		<div id="outcomes"style="display: grid; grid-template-columns: auto auto auto auto auto auto auto auto auto auto auto; width: 100%;margin-top:25px; row-gap: auto; column-gap:0px; justify-content: center;">
+			<div style="grid-area: 1 / 1 / 3 / 3;"></div>
+			<div style="grid-column: 3 / 12; text-align:center; font-size:50px; color:#6E6967;">Player Pick</div>
+			<div style="grid-row: 3 / 12;writing-mode: vertical-lr;-webkit-transform: rotate(-180deg);-moz-transform: rotate(-180deg); text-align:center; font-size:50px; color:#6E6967; margin-top:25px;">Computer Pick</div>
+			<div class="table header">Rock</div>
+			<div class="table header">Paper</div>
+			<div class="table header">Scissors</div>
+			<div class="table header">Flamethrower</div>
+			<div class="table header">Nuke</div>
+			<div class="table header">Wrench</div>
+			<div class="table header">Robot</div>
+			<div class="table header">Drill</div>
+			<div class="table header">Acid</div>
+			<div class="table sider">Rock</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">Win</div>
+			<div class="table lose">Lose</div>
+			<div class="table lose">Lose</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table sider">Paper</div>
+			<div class="table lose">Lose</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table sider">Scissors</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table sider">flamethrower</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table sider">nuke</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table sider">wrench</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">tie</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table sider">Robot</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table sider">Drill</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">Tie</div>
+			<div class="table win">win</div>
+			<div class="table sider">Acid</div>
+			<div class="table lose">lose</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table win">win</div>
+			<div class="table lose">lose</div>
+			<div class="table tie">Tie</div>
+		</div>
+		<script>
+			var playerChoice;
+			var aiChoice;
+			function playGame(){
+				document.getElementById('homeScreen').style.display="none";
+				document.getElementById('gamePlay').style.display="block";
+			}
+			function restartGame(){
+				document.getElementById('homeScreen').style.display="block";
+				document.getElementById('gameResult').style.display="none";
+				document.getElementById('flavorText').innerHTML="";
+			}
+			function pickRock(){
+				playerChoice=1;
+				playerChoose();
+			}
+			function pickPaper(){
+				playerChoice=2;
+				playerChoose();
+			}
+			function pickScissors(){
+				playerChoice=3;
+				playerChoose();
+			}
+			function pickFlamethrower(){
+				playerChoice=4;
+				playerChoose();
+			}
+			function pickNuke(){
+				playerChoice=5;
+				playerChoose();
+			}
+			function pickWrench(){
+				playerChoice=6;
+				playerChoose();
+			}
+			function pickRobot(){
+				playerChoice=7;
+				playerChoose();
+			}
+			function pickDrill(){
+				playerChoice=8;
+				playerChoose();
+			}
+			function pickAcid(){
+				playerChoice=9;
+				playerChoose();
+			}
+			function playerChoose(){
+				aiChoose();
+				switch (playerChoice){
+					case 1:
+					document.getElementById('showPlayerPick').innerHTML="rock";
+					document.getElementById('playerImage').innerHTML='<img src="images/dwayne.png">';
+					break;
+					case 2:
+					document.getElementById('showPlayerPick').innerHTML="paper";
+					document.getElementById('playerImage').innerHTML='<img src="images/crumpled.png">';
+					break;
+					case 3:
+					document.getElementById('showPlayerPick').innerHTML="scissors";
+					document.getElementById('playerImage').innerHTML='<img src="images/safety_scissors.png">';
+					break;
+					case 4:
+					document.getElementById('showPlayerPick').innerHTML="flamethrower";
+					document.getElementById('playerImage').innerHTML='<img src="images/fire.png">';
+					break;
+					case 5:
+					document.getElementById('showPlayerPick').innerHTML="nuke";
+					document.getElementById('playerImage').innerHTML='<img src="images/mushroom.png">';
+					break;
+					case 6:
+					document.getElementById('showPlayerPick').innerHTML="wrench";
+					document.getElementById('playerImage').innerHTML='<img src="images/wrench2.png">';
+					break;
+					case 7:
+					document.getElementById('showPlayerPick').innerHTML="robot";
+					document.getElementById('playerImage').innerHTML='<img src="images/mark.png">';
+					break;
+					case 8:
+					document.getElementById('showPlayerPick').innerHTML="drill";
+					document.getElementById('playerImage').innerHTML='<img src="images/2drill.png">';
+					break;
+					case 9:
+					document.getElementById('showPlayerPick').innerHTML="acid";
+					document.getElementById('playerImage').innerHTML='<img src="images/acids.png">';
+					break;
+				}
+				evaluateResult();
+				document.getElementById('gamePlay').style.display="none";
+				document.getElementById('choiceReveal').style.display="block";
+				document.getElementById('leftPanel').classList.add('leftPanel');
+				document.getElementById('rightPanel').classList.add('rightPanel');
+				document.getElementById('playerPick').classList.add('playerEnter');
+				document.getElementById('aiPick').classList.add('aiEnter');
+				setTimeout(() => {
+					document.getElementById('leftPanel').classList.remove('leftPanel');
+					document.getElementById('rightPanel').classList.remove('rightPanel');
+					document.getElementById('playerPick').classList.remove('playerEnter');
+					document.getElementById('aiPick').classList.remove('aiEnter');
+					document.getElementById('playerPick').classList.add('leaveLeft');
+					document.getElementById('aiPick').classList.add('leaveRight');
+					document.getElementById('leftPanel').classList.add('leaveLeft');
+					document.getElementById('rightPanel').classList.add('leaveRight');
+					document.getElementById('versus').classList.add('vsLeave');
+					document.getElementById('gameResult').style.display="block";
+				}, 6000);
+				setTimeout(() => {
+					document.getElementById('choiceReveal').style.display="none";
+					document.getElementById('leftPanel').classList.remove('leaveLeft');
+					document.getElementById('rightPanel').classList.remove('leaveRight');
+					document.getElementById('playerPick').classList.remove('leaveLeft');
+					document.getElementById('aiPick').classList.remove('leaveRight');
+					document.getElementById('versus').classList.remove('vsLeave');
+				},8000);
+			}
+			function aiChoose(){
+				aiChoice = Math.ceil(Math.random()*9);
+				//aiChoice = 2;
+				switch (aiChoice) {
+					case 1:
+					document.getElementById('showAiPick').innerHTML="rock";
+					document.getElementById('aiImage').innerHTML='<img src="images/dwayne.png">';
+					break;
+					case 2:
+					document.getElementById('showAiPick').innerHTML="paper";
+					document.getElementById('aiImage').innerHTML='<img src="images/crumpled.png">';
+					break;
+					case 3:
+					document.getElementById('showAiPick').innerHTML="scissors";
+					document.getElementById('aiImage').innerHTML='<img src="images/safety_scissors.png">';
+					break;
+					case 4:
+					document.getElementById('showAiPick').innerHTML="flamethrower";
+					document.getElementById('aiImage').innerHTML='<img src="images/fire.png">';
+					break;
+					case 5:
+					document.getElementById('showAiPick').innerHTML="nuke";
+					document.getElementById('aiImage').innerHTML='<img src="images/mushroom.png">';
+					break;
+					case 6:
+					document.getElementById('showAiPick').innerHTML="wrench";
+					document.getElementById('aiImage').innerHTML='<img src="images/wrench2.png">';
+					break;
+					case 7:
+					document.getElementById('showAiPick').innerHTML="robot";
+					document.getElementById('aiImage').innerHTML='<img src="images/mark.png">';
+					break;
+					case 8:
+					document.getElementById('showAiPick').innerHTML="drill";
+					document.getElementById('aiImage').innerHTML='<img src="images/2drill.png">';
+					break;
+					case 9:
+					document.getElementById('showAiPick').innerHTML="acid";
+					document.getElementById('aiImage').innerHTML='<img src="images/acids.png">';
+					break;
+				}
+			}
+			function evaluateResult(){
+				//ties
+				if(aiChoice==1&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==2&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==3&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==4&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You tied";
+					document.getElementById('flavorText').innerHTML="don't fight fire with fire";
+				}
+				else if(aiChoice==5&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You tied";
+					document.getElementById('flavorText').innerHTML="how many nukes could a nuke nuke if nukes could nuke nukes";
+				}
+				else if(aiChoice==6&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==7&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==8&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				else if(aiChoice==9&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You tied";
+				}
+				//wins
+				else if(aiChoice==1&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Paper covers rock";
+				}
+				else if(aiChoice==2&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Scissors cuts paper";
+				}
+				else if(aiChoice==3&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Rock smashes scissors";
+				}
+				else if(aiChoice==4&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="R O C K";
+				}
+				else if(aiChoice==3&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML='Contemporary flamethrowers can incinerate a target some 50–100 meters (160–330 ft) from the operator. scissors cannot';
+				}
+				else if(aiChoice==2&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Paper burns...a lot";
+				}
+				else if(aiChoice==4&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="rocks are surprisingly good sheilds";
+				}
+				else if(aiChoice==2&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Waste of a nuke";
+				}
+				else if(aiChoice==4&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML='"A nuclear device no larger than a conventional bomb can devastate an entire city by blast, fire, and radiation"';
+				}
+				else if(aiChoice==1&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Nuke+rock=no rock";
+				}
+				else if(aiChoice==5&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="scissors diffuses bomb";
+				}
+				else if(aiChoice==6&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="rock cannot be wrenched";
+				}
+				else if(aiChoice==6&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="paper wraps wrench";
+				}
+				else if(aiChoice==3&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="wrench unbolts scissors";
+				}
+				else if(aiChoice==5&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="wrenches build nukes<br>(just trust me on this one)";		
+				}
+				else if(aiChoice==6&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="it doesn't matter how powerful the wrench is, it still has no range";
+				}
+				else if(aiChoice==7&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="rock dents robot";
+				}
+				else if(aiChoice==7&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="paper overwrites the robot's hard drive";
+				}
+				else if(aiChoice==7&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="wrench un-builds robot";
+				}
+				else if(aiChoice==3&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="why do you think robots are made of steel? to protect against scissor attacks of course";
+				}
+				else if(aiChoice==3&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="why do you think robots are made of steel? to protect against scissor attacks, of course";
+				}
+				else if(aiChoice==4&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="not all robots are fireproof. luckily for you, this one is";
+				}
+				else if(aiChoice==5&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML='"Mark my words — A.I. is far more dangerous than nukes"-Elon musk';
+				}
+				else if(aiChoice==1&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Drills turn coal to diamond";
+				}
+				else if(aiChoice==4&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="Drills create a vortex effect that causes the fire to harmlessly bypass the operator";
+				}
+				else if(aiChoice==5&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="drill make bomb no go boom";
+				}
+				else if(aiChoice==7&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="though robots are incapable of feeling fear, they are terrified of drills";
+				}
+				else if(aiChoice==8&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="a well-placed sheet of paper can stop a drill in its tracks";
+				}
+				else if(aiChoice==8&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="scissors can be used like pliers, rendering the drill bit useless";
+				}
+				else if(aiChoice==8&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML='<a href="https://www.wikihow.com/Remove-a-Drill-Bit#:~:text=Things%20You%20Should%20Know,to%20rotate%20the%20bit%20free." target="_blank">wikihow.com/Remove-a-Drill-Bit</a>';
+				}
+				else if(aiChoice==1&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="acid disolves rocks. end of story";
+				}
+				else if(aiChoice==2&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML='<a href="https://www.youtube.com/watch?v=2hs0FdjcJlw" target="_blank">Acid vs Paper</a>';
+				}
+				else if(aiChoice==6&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="wrenches are metal, and acids can dissolve metal";
+				}
+				else if(aiChoice==8&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="acid breaks drill";
+				}
+				else if(aiChoice==9&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="scissors cut acid...duh";
+				}
+				else if(aiChoice==9&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="acid is flammable";
+				}
+				else if(aiChoice==9&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="nuke nukes acid";
+				}
+				else if(aiChoice==9&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="nuke nukes acid";
+				}
+				else if(aiChoice==9&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You won";
+					document.getElementById('flavorText').innerHTML="because yes";
+				}
+				//losses
+				else if(aiChoice==2&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="paper cover rock";
+				}
+				else if(aiChoice==3&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="scissors cuts paper";
+				}
+				else if(aiChoice==1&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="rock smashes scissors";
+				}
+				else if(aiChoice==1&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="Ever try lighting a rock on fire? you can't";
+				}
+				else if(aiChoice==5&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="Did you just...try beating a nuclear bomb with a piece of paper?";
+				}
+				else if(aiChoice==4&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="You can't cut fire";
+				}
+				else if(aiChoice==4&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="what did you think was going to happen?";
+				}
+				else if(aiChoice==5&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="Don't bring a handheld weapon to nuclear war";
+				}
+				else if(aiChoice==3&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="diffused";
+				}
+				else if(aiChoice==5&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="Who would win: Weapon of mass destruction or buff man?";
+				}
+				else if(aiChoice==6&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML='You know that bolt that keeps the two scissor blades together? A wrench can undo that';
+				}
+				else if(aiChoice==6&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="With enough dedication, you too can learn to undo a nuke with nothing but a wrench";
+				}
+				else if(aiChoice==1&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="Rocks and wrenches aren't exactly the perfect pairing";
+				}
+				else if(aiChoice==2&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="paper doesn't exactly have screws... or bolts... or really anything else useful to a wrench";
+				}
+				else if(aiChoice==4&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="try getting close enough to use that wrench. see what happens";
+				}
+				else if(aiChoice==6&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="a skilled roboticist can dismantle a robot within a minute";
+				}
+				else if(aiChoice==1&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="in case of robot revolution, use rocks";
+				}
+				else if(aiChoice==2&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="paper reprograms robot";
+				}
+				else if(aiChoice==7&&playerChoice==3){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="fun fact: robots can't feel pain";
+				}
+				else if(aiChoice==7&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="robots have no avesrsion to fire of any kind";
+				}
+				else if(aiChoice==7&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML='nukes had to lose against <span style="font-style: normal;">something</span>';
+				}
+				else if(aiChoice==2&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML='it only takes 42 folds for paper to reach the moon. do you think a drill could get through <span style="font-style: normal;">that</span>?';
+				}
+				else if(aiChoice==3&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="it's my game, my rules. and i say that drill loses to scissors";
+				}
+				else if(aiChoice==6&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="wrenches are better at beating drills than drills are at beating wrenches";
+				}
+				else if(aiChoice==8&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="diamond drills can literally drill anything";
+				}
+				else if(aiChoice==8&&playerChoice==4){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="drills are all-powerful";
+				}
+				else if(aiChoice==8&&playerChoice==5){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="you thought you were going to win, didn't you? well, too bad";
+				}
+				else if(aiChoice==8&&playerChoice==7){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="drills are just built different";
+				}
+				else if(aiChoice==3&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="to be honest, i don't know either";
+				}
+				else if(aiChoice==3&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="to be honest, i don't know either";
+				}
+				else if(aiChoice==4&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="your acid went up in flames";
+				}
+				else if(aiChoice==5&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="you already knew what would happen";
+				}
+				else if(aiChoice==7&&playerChoice==9){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="robot outsmarts acid";
+				}
+				else if(aiChoice==9&&playerChoice==1){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="acid makes rocks into diamonds, but also destroys most of the rock in the process";
+				}
+				else if(aiChoice==9&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="dip paper into a tub of acid. see what happens";
+				}
+				else if(aiChoice==9&&playerChoice==2){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="dip paper into a tub of acid. see what happens";
+				}
+				else if(aiChoice==9&&playerChoice==6){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="acid can break wrenches, but wrenches can't fix acid";
+				}
+				else if(aiChoice==9&&playerChoice==8){
+					document.getElementById('showResult').innerHTML="You lost";
+					document.getElementById('flavorText').innerHTML="you can't drill liquid";
+				}
+				//error
+				else{
+					document.getElementById('showResult').innerHTML="not found";
+				}	
+			}
+		</script>
+	</body>
+</html>

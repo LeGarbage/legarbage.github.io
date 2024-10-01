@@ -1,0 +1,315 @@
+@keyframes playerEnter {
+	0% {
+		opacity: 0;
+		transform: translateX(-500px);
+	}
+
+	10% {
+		opacity: 1;
+		transform: translateX(-75px);
+	}
+	
+	100% {
+		transform: translateX(0px);
+	}
+	
+}
+@keyframes aiEnter {
+	0% {
+		opacity: 0;
+		transform: translateX(500px);
+	}
+
+	10% {
+		opacity: 1;
+		transform: translateX(75px);
+	}
+	
+	100% {
+		transform: translateX(0px);
+	}
+}
+@keyframes leaveLeft{
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(-500px);
+	}
+}
+@keyframes leaveRight{
+	0% {
+		opacity: 1;
+		transform: translateX(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateX(500px);
+	}
+}
+@keyframes leftPanelEnter {
+	0% {
+
+		transform: translateX(-600px);
+	}
+
+	100% {
+
+		transform: translateX(0);
+	}
+}
+@keyframes rightPanelEnter {
+	0% {
+
+		transform: translateX(600px);
+	}
+
+	100% {
+
+		transform: translateX(0);
+	}
+}
+@keyframes vsLeave {
+	0% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	100% {
+		opacity: 0;
+		transform: translateY(-250px);
+	}
+}
+html {
+  scroll-behavior: smooth;
+}
+body{
+	background-color: #27285C;
+	color:blue;
+	font-family:'Space Mono', monospace;
+	text-transform: uppercase;
+	background-color: #27285C;
+	margin:0;
+	margin-top: 30px;
+	background-image: linear-gradient(to bottom, transparent 20%, #27285C 99.9%), url('images/rps.jpg'); 
+	background-repeat: no-repeat;
+	background-size: 100% 110vh;
+}
+h1{
+	font-size:130px;
+	text-align:center;
+	color:#6E6967;
+}
+a:link {
+  color: blue;
+  background-color: transparent;
+}
+
+a:visited {
+  color: blue;
+  background-color: transparent;
+}
+
+a:hover {
+  color: red;
+  background-color: transparent;
+}
+p.title{
+	text-align:center;
+	font-size:100px;
+}
+p.instruct{
+	text-align:center;
+	font-size:60px;
+	padding:10px;
+	margin:0px;
+}
+p.show{
+	text-align:center;
+	font-size:70px;
+	padding:10px;
+	margin:0px;
+}
+p.flavor{
+	text-align: center;
+	width: 100%;
+	font-size:40px;
+	padding:10px;
+	font-style: italic;
+	margin: 0;
+  	position: absolute;
+  	top: 50%;
+  	transform: translateY(-50%);
+}
+div.flavor{
+	width:90%;
+	height:200px;
+	margin:0px;
+	position: absolute;
+	top: 55%;
+	left: 50%;
+	-ms-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+}
+button{
+	border:5px solid blue;
+	font-size:40px;
+	color:blue;
+	font-family:'Space Mono', monospace;
+	border-radius:25px;
+	background-color:black;
+	text-transform: uppercase;
+}
+button.start{
+	width: 300px;
+	height: 100px;
+	top: 70%;
+	left: 450px;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+	font-size:50px;
+}
+button.choice{
+	height:225px;
+	width:auto;
+	min-width:200px;
+	max-width:250px;
+}
+button.restart{
+	width: 300px;
+	height: 100px;
+	bottom: 1em;
+	left: 450px;
+	padding: 0px;
+	margin: 0px;
+	position: absolute;
+}
+img{
+	height:150px;
+	user-drag: none;  
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+}
+img.select{
+	height: 90px;
+}
+
+.holdText{
+	position: absolute;
+	padding: 0px;
+	margin: 0px;
+	width:100%;
+	height:100%;
+}
+.gameElements{
+	width:1200px;
+	height:600px;
+	background-color:black;
+	position: relative;
+	overflow: hidden;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none; 
+	margin: auto;
+	margin-top:50px;
+}
+.pick{
+	width: 50%; 
+	text-align: center;
+	position: relative;
+	color:black;
+	bottom: 10%;
+}
+.afterpick{
+	width:100%;
+	margin: 0;
+	position: absolute;
+	top: 30%;
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+}
+.playerEnter{
+	animation: playerEnter 6s linear 1s 1 normal both;
+}
+.aiEnter{
+	animation: aiEnter 6s linear 1s 1 normal both;
+}
+.leaveLeft{
+	animation: leaveLeft 2s ease 0s 1 normal forwards;
+}
+.leaveRight{
+	animation: leaveRight 2s ease 0s 1 normal forwards;
+}
+.background{
+	width:50%;
+	height: 100%;
+	position:absolute;
+	background-color: blue;
+}
+.leftPanel{
+	animation: leftPanelEnter 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0s 1 normal forwards;
+}
+.rightPanel{
+	animation: rightPanelEnter 0.75s cubic-bezier(0.76, 0, 0.24, 1) 0s 1 normal forwards;
+}
+.vsLeave{
+	animation: vsLeave 2s ease-out 0s 1 normal forwards;
+}
+.table{
+	width: 125px;
+	color: black;
+	text-align: center;
+}
+.win{
+	background-color:green;
+}
+.lose{
+	background-color:red;
+}
+.tie{
+	background-color:yellow;
+}
+.header{
+	border-right:1px solid black;
+	border-left:1px solid black;
+}
+.sider{
+	border-top:1px solid black;
+	border-bottom:1px solid black;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #6E6967;
+   position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  box-shadow: 0 10px 5px black;
+}
+li {
+  	float: left;
+	margin:0;
+}
+li a {
+  	display: block;
+  	text-align: center;
+  	padding: 14px 16px;
+  	text-decoration: none;
+	font-size:30px;
+	color: #27285C;
+}
+li a:hover {
+  background-color: #27285C;
+  color:#6E6967;
+}
