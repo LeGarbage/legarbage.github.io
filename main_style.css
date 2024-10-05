@@ -3,6 +3,7 @@ body {
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
+    min-height: 100%;
 }
 
 a {
@@ -11,34 +12,44 @@ a {
 
 body>div:first-of-type{
     display: flex;
-    flex-flow: column wrap;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+body>div:nth-of-type(2){
+    right: 0;
+    top: 0;
+    position: absolute;
+    float: right;
+    display: flex;
+    flex-flow: column;
+    height: 100vmax;
     border: 1px solid white;
 }
 
-body>div:first-of-type div{
+body>div:nth-of-type(-n+2) div.bar{
+    position: sticky;
+    top: 0;
     backdrop-filter: blur(5px);
-    text-decoration: none;
-    color: white;
     border: .25em solid white;
     padding: 1em;
     margin: 0 1em 1em;
-    width: 5em;
-    position: sticky;
-    top: 0;
 }
 
-body>div:first-of-type>div>a{
+body>div:nth-of-type(-n+2)>div.bar>a{
     text-decoration: none;
     color: white;
 }
 
-body>div:first-of-type>div:hover{
+body>div:nth-of-type(-n+2)>div.bar:hover{
     background-color: rgba(22, 155, 106, 0.15);
     border-color: black;
     color: black;
 }
 
-body>div:first-of-type>div.current{
+body>div:nth-of-type(-n+2)>div.bar.current{
     background-color: rgba(130, 81, 31, 0.5);
     backdrop-filter: blur(10px);
 }
