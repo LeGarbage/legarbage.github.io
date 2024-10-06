@@ -11,45 +11,37 @@ a {
 }
 
 body>div:first-of-type{
-    display: flex;
+    top: 0;
     position: fixed;
-    width: 100%;
-    top: 0;
-    left: 0;
-}
-
-body>div:nth-of-type(2){
-    right: 0;
-    top: 0;
-    position: absolute;
-    float: right;
     display: flex;
-    flex-flow: column;
-    height: 100vmax;
-    border: 1px solid white;
 }
 
-body>div:nth-of-type(-n+2) div.bar{
-    position: sticky;
-    top: 0;
+body>div:first-of-type>div{
+    font-size: 1em;
+    flex-basis: 100%;
+    animation-fill-mode: forwards;
     backdrop-filter: blur(5px);
     border: .25em solid white;
     padding: 1em;
-    margin: 0 1em 1em;
+    margin: 1em 0 1em 1em;
 }
 
-body>div:nth-of-type(-n+2)>div.bar>a{
+body>div:first-of-type>div:last-child{
+    margin-right: 1em;
+}
+
+body>div:first-of-type>div>a{
     text-decoration: none;
     color: white;
 }
 
-body>div:nth-of-type(-n+2)>div.bar:hover{
+body>div:first-of-type>div:hover{
     background-color: rgba(22, 155, 106, 0.15);
     border-color: black;
     color: black;
 }
 
-body>div:nth-of-type(-n+2)>div.bar.current{
+body>div:first-of-type>div.current{
     background-color: rgba(130, 81, 31, 0.5);
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px) invert(10%);
 }

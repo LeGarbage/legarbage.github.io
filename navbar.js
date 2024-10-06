@@ -1,25 +1,24 @@
-const sidebar = document.getElementById("sidebar");
-const topbar = document.getElementById("topbar");
-const linkPlaceholder = document.createElement("div");
-linkPlaceholder.style.width = sidebar.children[0].offsetWidth + "px";
-linkPlaceholder.style.height = sidebar.children[0].offsetHeight + "px";
+const navbar = document.getElementById("navbar");
 
-// sidebarPlaceholder.style.top = sidebar.offsetTop + "px";
-// sidebarPlaceholder.style.left = sidebar.offsetLeft + "px"
-// for (let i = 0; i < sidebar.childElementCount; i++){
-//     sidebarPlaceholder.children[i].style.width = sidebar.children[i].offsetWidth + "px";
-//     sidebarPlaceholder.children[i].style.height = sidebar.children[i].offsetHeight + "px";
-// }
+navbar.style.width = `calc(${navbar.children[navbar.children.length - 1].getBoundingClientRect().right}px + ${navbar.children.length - 1}em)`;
 
-window.addEventListener("scroll", function(e){
-    for (let i = 0; i < 1; i++){
-        let linkTop = sidebar.children[i].getBoundingClientRect().top;
-        if (linkTop <= 0 && sidebar.children[i].classList.contains("bar")){
-            topbar.appendChild(sidebar.children[i]);
-            sidebar.insertBefore(linkPlaceholder.cloneNode(), sidebar.children[0]);
-        } else if (linkTop > 0 && !sidebar.children[i].classList.contains("bar")){
-            console.log(sidebar.children, topbar.children)
-            sidebar.replaceChild(topbar.children[i], sidebar.children[i]);
-        }
-    }
-});
+for(let i = 0; i < navbar.children.length; i++){
+    navbar.children[i].style.transform = `translate(calc(${document.documentElement.clientWidth - navbar.children[i].getBoundingClientRect().right}px - 1em), calc(${navbar.getBoundingClientRect().bottom * i}px - ${i}em))`;
+    document.styleSheets[0].insertRule(`@keyframes move-link-${i}{0%,10%{transform: translate(${getTranslateX(navbar.children[i])}px,${getTranslateY(navbar.children[i])}px);}${(70/navbar.children.length) * i + 10}%{transform: translate(${getTranslateX(navbar.children[i])}px ,0px);}80%,100%{transform: translateX(0);}}`)
+    navbar.children[i].style.animation = `move-link-${i} linear forwards`;
+    navbar.children[i].style.animationTimeline = `scroll(root block)`;
+    navbar.children[i].style.animationTimingFunction = `ease-out`
+    console.log(navbar.children[i].style, document.styleSheets[0])
+}
+
+function getTranslateX(element){
+    const style = window.getComputedStyle(element);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m41;
+}
+
+function getTranslateY(element){
+    const style = window.getComputedStyle(element);
+    const matrix = new DOMMatrixReadOnly(style.transform);
+    return matrix.m42;
+}
