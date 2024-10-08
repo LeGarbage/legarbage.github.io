@@ -4,6 +4,11 @@
         <title>LeGarbage</title>
         <link rel="icon" type="image/x-icon" href="images/favicon.ico">
         <link rel="stylesheet" href="main_style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Carme&display=swap" rel="stylesheet">
+        <script src="main.js"></script>
+        <script src="navbar.js"></script>
     </head>
     <body>
         <div id="navbar">
@@ -14,25 +19,14 @@
             <div><a>Other thing</a></div>
             <div><a>Other thing</a></div>
         </div>
-        <h1>WELCOME TO MY SWAMP</h1>
+        <h1 id="title"></h1>
         <p>You should click on <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">this</a></p>
         <p>Also, here's a picture of Shrek to make your day that much better:</p>
         <img src="images/shrex.jpg" alt="I'm sorry">
-        <h3>Some things</h3>
-        <ol>
-            <li><p>I like big pages</p></li>
-            <li><p>I want this page to scroll</p></li>
-            <li><p>Do you like shrek?</p></li>
-            <li><p>I don't know if you knew this or not, but I like shrek</p></li>
-            <li><p>Did you know that the shrek script is 7243 words?</p></li>
-            <li><p>I also like horizontal dividers</p></li>
-            <li><p>I like big pages</p></li>
-            <li><p>I want this page to scroll</p></li>
-            <li><p>Do you like shrek?</p></li>
-            <li><p>I don't know if you knew this or not, but I like shrek</p></li>
-            <li><p>Did you know that the shrek script is 7243 words?</p></li>
-            <li><p>I also like horizontal dividers</p></li>
-        </ol>
+        <img src="images/shrek.jpg" id="shrekPic" class="hidden">
+        <h3>Some things you can do:</h3>
+        <button type="button" onclick="getFortune()">Get Your Fortune</button>
+        <button type="button" id="shrekify" onclick="shrekify()">Shrekify</button>
         <hr>
         <br>
         <hr>
@@ -93,7 +87,6 @@
         <br>
         <hr>
         <br>
-        <script src="navbar.js"></script>
     </body>
 </html>
 

@@ -1,5 +1,15 @@
+@keyframes falling {
+    from {
+        scale: 25;
+    }
+    to {
+        scale: 1;
+    }
+}
+
 body {
     background-image: linear-gradient(160deg,#053222, #82511f);
+    font-family: "Carme";
     background-repeat: no-repeat;
     background-size: cover;
     color: white;
@@ -8,6 +18,41 @@ body {
 
 a {
     color: #169b6a;
+}
+
+button {
+    color: inherit;
+    padding: 1em;
+    border: .25em solid white;
+    border-radius: 1em;
+    background-color: #053222;
+    transition: all .25s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #82511f;
+    border-width: .35em;
+    border-radius: .5em;
+    font-size: .95em;
+}
+
+button:active {
+    transition: none;
+    border-color: black;
+    color: black;
+}
+
+.big {
+    font-size: 2em;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.falling {
+    animation: falling 1s cubic-bezier(0.7, 0, 0.84, 0) 0s 1 normal forwards;
 }
 
 body>div:first-of-type{
@@ -33,7 +78,7 @@ body>div:first-of-type>div>a{
     display: block;
     padding: 1em;
     text-decoration: none;
-    color: white;
+    color: inherit;
 }
 
 body>div:first-of-type>div:hover{
