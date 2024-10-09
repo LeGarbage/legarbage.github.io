@@ -12,6 +12,7 @@ html {
 }
 
 body {
+    font-size: 2vw;
     background-image: linear-gradient(160deg,#053222, #82511f);
     font-family: "Carme";
     background-repeat: no-repeat;
@@ -24,8 +25,22 @@ a {
     color: #169b6a;
 }
 
+h1 {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    font-size: 10vw;
+}
+
+img {
+    aspect-ratio: auto;
+    width: 45vw;
+}
+
 button {
     color: inherit;
+    font-size: inherit;
     padding: 1em;
     border: .25em solid white;
     border-radius: 1em;
@@ -36,19 +51,13 @@ button {
 
 button:hover {
     background-color: #82511f;
-    border-width: .35em;
     border-radius: .5em;
-    font-size: .95em;
 }
 
 button:active {
     transition: none;
     border-color: black;
     color: black;
-}
-
-.big {
-    font-size: 2em;
 }
 
 .hidden {
@@ -60,8 +69,8 @@ button:active {
 }
 
 #navbar{
+    font-size: 1.52vw;
     top: 0;
-    position: sticky;
     display: flex;
 }
 
