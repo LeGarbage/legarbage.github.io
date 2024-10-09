@@ -45,5 +45,8 @@ function getFortune() {
 }
 
 window.addEventListener("load", function(){
-    typeEffect(document.getElementById("title"), "WELCOME TO MY SWAMP");
+    let title = document.getElementById("title");
+    let titleText = title.innerText;
+    title.innerText = "";
+    typeEffect(title, titleText);
 });

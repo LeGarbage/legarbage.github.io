@@ -7,6 +7,10 @@
     }
 }
 
+html {
+    min-height: 100%;
+}
+
 body {
     background-image: linear-gradient(160deg,#053222, #82511f);
     font-family: "Carme";
@@ -55,13 +59,13 @@ button:active {
     animation: falling 1s cubic-bezier(0.7, 0, 0.84, 0) 0s 1 normal forwards;
 }
 
-body>div:first-of-type{
+#navbar{
     top: 0;
-    position: fixed;
+    position: sticky;
     display: flex;
 }
 
-body>div:first-of-type>div{
+#navbar>div{
     font-size: 1em;
     flex-basis: 100%;
     animation-fill-mode: forwards;
@@ -69,11 +73,11 @@ body>div:first-of-type>div{
     margin: 1em 0 1em 1em;
 }
 
-body>div:first-of-type>div:last-child{
+#navbar>div:last-child{
     margin-right: 1em;
 }
 
-body>div:first-of-type>div>a{
+#navbar>div>a{
     border: .25em solid white;
     display: block;
     padding: 1em;
@@ -81,16 +85,23 @@ body>div:first-of-type>div>a{
     color: inherit;
 }
 
-body>div:first-of-type>div:hover{
+#navbar>div:hover{
     background-color: rgba(22, 155, 106, 0.15);
 }
 
-body>div:first-of-type>div>a:hover{
+#navbar>div>a:hover{
     border-color: black;
     color: black;
 }
 
-body>div:first-of-type>div.current{
+#navbar>div.current{
     background-color: rgba(130, 81, 31, 0.5);
     backdrop-filter: blur(10px) invert(10%);
+}
+
+#title-card {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
