@@ -46,6 +46,10 @@
         inputsFrom = [ pkgs.portfolio ];
         packages = [
           pkgs.rust-analyzer
+
+          # HTML LSP
+          pkgs.vscode-langservers-extracted
+
           pkgs.rustfmt
         ];
       };
