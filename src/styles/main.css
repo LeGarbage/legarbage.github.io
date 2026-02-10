@@ -1,18 +1,17 @@
 :root {
-    --gray1: #212121;
-    --gray2: #292929;
-    --gray2point5: #353535;
-    --gray3: #474646;
-    --gray4: #6a6c6c;
-    --gray5: #b7bdc0;
-    --red: #dd7186;
-    --green: #87bb7c;
-    --yellow: #d5b875;
-    --blue: #70ace5;
+    --gray1: #282c34;
+    --gray2: #31353f;
+    --gray3: #393f4a;
+    --gray4: #5c6370;
+    --gray5: #abb2bf;
+    --red: #e86671;
+    --green: #98c379;
+    --yellow: #e5c07b;
+    --blue: #61afef;
     --blue2: #5873dd;
-    --purple: #a48add;
-    --cyan: #69c5ce;
-    --orange: #d7956e;
+    --purple: #c678dd;
+    --cyan: #56b6c2;
+    --orange: #d19a66;
     --indigo: #7681de;
     --pink: #ff69b4;
     --warning: #d6a940;
@@ -123,7 +122,7 @@ section {
 }
 
 section:nth-child(even) {
-    background: var(--gray2point5);
+    background: var(--gray3);
 }
 
 h2 {
@@ -153,7 +152,6 @@ ul li {
     font-weight: bold;
 }
 
-/* Links */
 a {
     color: var(--cyan);
     text-decoration: none;
@@ -268,16 +266,6 @@ a:hover {
     white-space: nowrap;
 }
 
-/* Footer */
-footer {
-    background: #1f1f1f;
-    color: var(--gray4);
-    padding: 2rem;
-    text-align: center;
-    flex-shrink: 0;
-}
-
-/* Responsive */
 @media (max-width: 600px) {
     header h1 {
         font-size: 2rem;
