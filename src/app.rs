@@ -1,4 +1,4 @@
-use crate::components::{Bio, Contact, Projects, Skills};
+use crate::components::{Bio, Contact, Projects, Resume, Skills};
 use yew::prelude::*;
 
 #[component]
@@ -26,6 +26,7 @@ pub fn App() -> Html {
         <Bio />
         <Skills />
         <Projects />
+        <Resume />
         <Contact />
         </>
     }

@@ -132,11 +132,19 @@ h2 {
     text-align: center;
 }
 
+ul {
+    margin: 1rem;
+}
+
+hr {
+    margin: 0.5rem 0;
+}
+
 p {
     font-size: 1.1rem;
 }
 
-ul {
+#skills ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -144,7 +152,7 @@ ul {
     gap: 1rem;
 }
 
-ul li {
+#skills ul li {
     background: var(--orange);
     color: var(--gray1);
     padding: 0.5rem 1rem;
@@ -160,6 +168,10 @@ a {
 a:hover {
     color: var(--purple);
     text-decoration: underline;
+}
+
+.right {
+    float: right;
 }
 
 .project-card {
