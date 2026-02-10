@@ -1,0 +1,27 @@
+* legarbage.github.io
+
+  This is a pretty cool website.
+
+** Installation and Setup
+
+   A Nix flake and Direnv environment have been added for your convenience.
+   If you are not using Nix, you need the following:
+
+   - Rust with the ~wasm32-unknown-unknown~ target installed (for more info see
+     [[https://yew.rs/docs/getting-started/introduction][here]])
+   - [[https://trunk-rs.github.io/trunk/guide/getting-started/installation.html][Trunk]]
+
+** Building
+
+   It is recommended to not build using ~nix build~ due to the lack of
+   dependency caching. Instead, you can build using
+
+   #+begin_src sh
+   trunk build
+   #+end_src
+
+   or serve it locally by running
+
+   #+begin_src sh
+   trunk serve
+   #+end_src
