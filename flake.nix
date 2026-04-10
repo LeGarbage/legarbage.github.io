@@ -11,22 +11,24 @@
         default =
           {
             pkgs,
-            stdenv,
             lib,
+            rustPlatform,
             ...
           }:
-          stdenv.mkDerivation {
+          rustPlatform.buildRustPackage {
             pname = "site";
             version = "0.1.0";
 
             src = lib.cleanSource ./.;
 
+            cargoLock = {
+              lockFile = ./Cargo.lock;
+            };
+
             nativeBuildInputs = with pkgs; [
               trunk
               wasm-bindgen-cli
               rustc.llvmPackages.lld
-              rustc
-              cargo
             ];
 
             buildPhase = ''
