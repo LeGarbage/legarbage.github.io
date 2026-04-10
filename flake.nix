@@ -11,28 +11,26 @@
         default =
           {
             pkgs,
+            stdenv,
             lib,
-            rustPlatform,
             ...
           }:
-          rustPlatform.buildRustPackage {
-            pname = "portfolio";
+          stdenv.mkDerivation {
+            pname = "site";
             version = "0.1.0";
 
             src = lib.cleanSource ./.;
 
-            cargoLock = {
-              lockFile = ./Cargo.lock;
-            };
-
-            nativeBuildInputs = [
-              pkgs.trunk
-              pkgs.wasm-bindgen-cli
-              pkgs.rustc.llvmPackages.lld
+            nativeBuildInputs = with pkgs; [
+              trunk
+              wasm-bindgen-cli
+              rustc.llvmPackages.lld
+              rustc
+              cargo
             ];
 
             buildPhase = ''
-              trunk build
+              trunk build --release
             '';
 
             installPhase = ''
@@ -43,14 +41,15 @@
       };
 
       devShell = pkgs: {
-        inputsFrom = [ pkgs.portfolio ];
-        packages = [
-          pkgs.rust-analyzer
+        inputsFrom = [
+          pkgs.site
+        ];
+        packages = with pkgs; [
+          rust-analyzer
+          rustfmt
 
           # HTML LSP
-          pkgs.vscode-langservers-extracted
-
-          pkgs.rustfmt
+          vscode-langservers-extracted
         ];
       };
     };
