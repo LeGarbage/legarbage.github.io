@@ -17,10 +17,11 @@ pub fn App() -> Html {
                     with new technologies and building cool things."
                     }
                 </p>
-                    <div>
-                        <a href="#projects"><span>{ "View my projects" }</span></a>
-                        <a href="#contact"><span>{ "Get in touch" }</span></a>
-                    </div>
+                <div>
+                    <a href="#projects"><span>{ "View my projects" }</span></a>
+                    <a href="https://legarbage.github.io/blog"><span>{ "My blog" }</span></a>
+                    <a href="#contact"><span>{ "Get in touch" }</span></a>
+                </div>
             </div>
         </header>
         <Bio />
