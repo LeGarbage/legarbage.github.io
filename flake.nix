@@ -1,58 +1,39 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    flakelight.url = "github:nix-community/flakelight";
-  };
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+
   outputs =
-    { flakelight, ... }@inputs:
-    flakelight ./. {
-      inherit inputs;
-      packages = {
-        default =
+    { self, nixpkgs }:
+    let
+      inherit (nixpkgs) lib;
+
+      pkgsFor = system: nixpkgs.legacyPackages.${system} or (import nixpkgs { inherit system; });
+      supportedSystems = lib.systems.doubles.linux;
+      forAllSystems = function: lib.genAttrs supportedSystems (system: function (pkgsFor system));
+    in
+    {
+      packages = forAllSystems (pkgs: {
+        default = pkgs.callPackage (
           {
-            pkgs,
-            lib,
-            rustPlatform,
-            ...
+            buildNpmPackage,
           }:
-          rustPlatform.buildRustPackage {
-            pname = "site";
+          buildNpmPackage {
+            pname = "legarbage.github.io";
             version = "0.1.0";
 
-            src = lib.cleanSource ./.;
+            src = ./.;
 
-            cargoLock = {
-              lockFile = ./Cargo.lock;
-            };
+            npmDepsHash = "sha256-YjmIZ2foKRiAiA5f1SgKY0kxgnSErED4jGpK0cVVY7k=";
+          }
+        ) { };
+      });
 
-            nativeBuildInputs = with pkgs; [
-              trunk
-              wasm-bindgen-cli
-              rustc.llvmPackages.lld
-            ];
-
-            buildPhase = ''
-              trunk build --release
-            '';
-
-            installPhase = ''
-              mkdir -p $out
-              cp -r dist/* $out
-            '';
+      devShells = forAllSystems (pkgs: {
+        default =
+          with pkgs;
+          mkShell {
+            inputsFrom = [ self.packages.${stdenv.hostPlatform.system}.default ];
+            packages = [ astro-language-server ];
           };
-      };
-
-      devShell = pkgs: {
-        inputsFrom = [
-          pkgs.site
-        ];
-        packages = with pkgs; [
-          rust-analyzer
-          rustfmt
-
-          # HTML LSP
-          vscode-langservers-extracted
-        ];
-      };
+      });
     };
 }
