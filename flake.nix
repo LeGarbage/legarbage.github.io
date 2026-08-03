@@ -32,7 +32,6 @@
           with pkgs;
           mkShell {
             inputsFrom = [ self.packages.${stdenv.hostPlatform.system}.default ];
-            packages = [ astro-language-server ];
           };
       });
     };
