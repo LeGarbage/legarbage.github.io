@@ -1,8 +1,6 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const pageTitle = "About Me";
-
 const identity = {
     firstName: "Logan",
     country: "US",
@@ -11,30 +9,10 @@ const identity = {
 };
 
 const skills = ["Nix", "JavaScript", "React", "C++", "Astro"];
-
-const happy = true;
-const finished = false;
-const goal = 3;
-
-const skillColor = "blue";
-const fontWeight = "bold";
-const textCase = "uppercase";
 ---
 
-<style is:global define:vars={{ skillColor, fontWeight, textCase }}>
-    h1 {
-        color: purple;
-        font-size: 4rem;
-    }
-    .skill {
-        color: var(--skillColor);
-        font-weight: var(--fontWeight);
-        text-transform: var(--textCase);
-    }
-</style>
-
-<BaseLayout pageTitle={pageTitle}>
-    <h1>{pageTitle}</h1>
+<BaseLayout pageTitle="About">
+    <h1>About</h1>
     <p>I use Nix btw</p>
     <p>My name is {identity.firstName}</p>
     <li>
@@ -52,13 +30,4 @@ const textCase = "uppercase";
     <ul>
         {skills.map((skill) => <li class="skill">{skill}</li>)}
     </ul>
-    {happy && <p>I am happy to be learning Astro!</p>}
-    {finished && <p>I finished this tutorial!</p>}
-    {
-        goal === 3 ? (
-            <p>My goal is to finish in 3 days.</p>
-        ) : (
-            <p>My goal is not 3 days.</p>
-        )
-    }
 </BaseLayout>

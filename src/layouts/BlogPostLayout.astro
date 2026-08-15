@@ -1,42 +1,16 @@
 ---
+import type { CollectionEntry } from "astro:content";
 import BaseLayout from "./BaseLayout.astro";
-import dayjs from "dayjs";
-const { frontmatter } = Astro.props;
+import PostHeader from "../components/PostHeader.astro";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
 ---
 
-<style>
-    a {
-        color: #00539f;
-    }
-
-    .tags {
-        display: flex;
-        flex-wrap: wrap;
-    }
-
-    .tag {
-        margin: 0.25em;
-        border: dotted 1px #a1a1a1;
-        border-radius: 0.5em;
-        padding: 0.5em 1em;
-        font-size: 1.15em;
-        background-color: #f8fcfd;
-    }
-</style>
-
-<BaseLayout pageTitle={frontmatter.title}>
-    <h1>
-        {frontmatter.title}{" "}
-        {dayjs(frontmatter.pubDate).format("YYYY-MM-DD")}
-    </h1>
-    <div class="tags">
-        {
-            frontmatter.tags.map((tag: string) => (
-                <p class="tag">
-                    <a href={`/tags/${tag}`}>{tag}</a>
-                </p>
-            ))
-        }
-    </div>
+<BaseLayout pageTitle={post.data.title}>
+    <PostHeader post={post} level={"h1"} isLink={false} />
     <slot />
 </BaseLayout>

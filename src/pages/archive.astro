@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const postYears = posts.reduce(
+    (a, post) => {
+        const year = post.data.pubDate.getFullYear();
+
+        // a.getOrInsert(year, []).push(post);
+        if (a.has(year)) {
+            a.get(year)?.push(post);
+        } else {
+            a.set(year, [post]);
+        }
+
+        return a;
+    },
+    new Map() as Map<number, CollectionEntry<"blog">[]>,
+);
+---
+
+<BaseLayout pageTitle="Archive">
+    <header class="title">
+        <h1>Archive</h1>
+    </header>
+    {
+        postYears.entries().map(([year, posts]) => (
+            <section class="archive-section">
+                {" "}
+                <h2 class="archive-year">{year}</h2>{" "}
+                {posts.map((post) => (
+                    <h3 class="archive-title">
+                        <a href={`/posts/${post.id}`} class="title-link">
+                            <span class="time">
+                                {dayjs(post.data.pubDate).format("MMM DD")}
+                            </span>{" "}
+                            <span class="title">{post.data.title}</span>
+                        </a>
+                    </h3>
+                ))}
+            </section>
+        ))
+    }
+</BaseLayout>

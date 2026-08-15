@@ -1,0 +1,37 @@
+---
+import type { CollectionEntry } from "astro:content";
+import dayjs from "dayjs";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+    level: any;
+    isLink?: boolean;
+}
+
+const { post, level: Level, isLink = true } = Astro.props;
+---
+
+<header>
+    <Level class="post-title">
+        {
+            isLink ? (
+            <a href=`/posts/${post.id}` class="title-link">
+                    <span class="title">{post.data.title}</span>{" "}
+                    <span class="time">
+                        {dayjs(post.data.pubDate).format("YYYY-MM-DD")}
+                    </span>
+                </a>
+            ) : (
+                <>
+                    <span class="title">{post.data.title}</span>{" "}
+                    <span class="time">
+                        {dayjs(post.data.pubDate).format("YYYY-MM-DD")}
+                    </span>
+                </>
+            )
+        }
+    </Level>
+    <div class="post-tags">
+        {post.data.tags.map((tag: string) => <><a href=`/tags/${tag}` rel="tag" class="tag-link">#{tag}</a>{" "}</>)}
+    </div>
+</header>

@@ -1,9 +1,26 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
-const pageTitle = "Home Page";
+import PostExcerpt from "../components/PostExcerpt.astro";
+
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
 ---
 
-<BaseLayout pageTitle={pageTitle}>
-    <h1>{pageTitle}</h1>
-    <h2>My awesome blog subtitle</h2>
+<BaseLayout>
+    <header class="title">
+        <h1>LeBlog</h1>
+        <p>
+            Hello there! Welcome to LeBlog, the best blog on the internet for
+            people who enjoy blogs written by me.
+        </p>
+        <p>
+            Even if this is not the best blog on the internet for you, I hope
+            you find some value in this.
+        </p>
+        <p>Happy reading!</p>
+        <h2>Posts</h2>
+    </header>
+    {posts.map((post) => <PostExcerpt post={post} />)}
 </BaseLayout>

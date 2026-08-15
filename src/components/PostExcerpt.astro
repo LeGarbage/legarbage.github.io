@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from "astro:content";
+import PostHeader from "./PostHeader.astro";
+
+interface Props {
+    post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+---
+
+<article class="post">
+    <PostHeader post={post} level="h1" />
+    {post.data.description && <p>{post.data.description}</p>}
+</article>

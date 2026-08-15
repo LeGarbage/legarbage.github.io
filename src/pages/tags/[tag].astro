@@ -1,18 +1,16 @@
 ---
-import BaseLayout from "../../layouts/BaseLayout.astro";
-import BlogPost from "../../components/BlogPost.astro";
+import { getCollection } from "astro:content";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import PostExcerpt from "../../../components/PostExcerpt.astro";
 
 export async function getStaticPaths() {
-    const posts = Object.values(
-        import.meta.glob("../posts/*.md", { eager: true }),
-    );
-    const tags = [
-        ...new Set(posts.map((post: any) => post.frontmatter.tags).flat()),
-    ];
+    const posts = await getCollection("blog");
+
+    const tags = [...new Set(posts.map((post) => post.data.tags).flat())];
 
     return tags.map((tag) => {
-        const taggedPosts = posts.filter((post: any) =>
-            post.frontmatter.tags?.includes(tag),
+        const taggedPosts = posts.filter((post) =>
+            post.data.tags.includes(tag),
         );
 
         return {
@@ -26,13 +24,11 @@ const { tag } = Astro.params;
 const { posts } = Astro.props;
 ---
 
-<BaseLayout pageTitle={tag}>
-    <p>Posts tagged with {tag}</p>
-    <ul>
-        {
-            posts.map((post: any) => (
-                <BlogPost url={post.url} title={post.frontmatter.title} />
-            ))
-        }
-    </ul>
+<BaseLayout pageTitle={`#${tag}`}>
+    <header class="title">
+        <h1>
+            Posts for <span class="tag-title">#{tag}</span>
+        </h1>
+    </header>
+    {posts.map((post) => <PostExcerpt post={post} />)}
 </BaseLayout>
