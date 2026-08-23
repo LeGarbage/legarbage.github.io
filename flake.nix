@@ -22,7 +22,7 @@
 
             src = ./.;
 
-            npmDepsHash = "sha256-YjmIZ2foKRiAiA5f1SgKY0kxgnSErED4jGpK0cVVY7k=";
+            npmDepsHash = "sha256-E2tyc+QC/yOuU6HBlobD85HesCUjpcs7g+y06eXhf60=";
           }
         ) { };
       });
